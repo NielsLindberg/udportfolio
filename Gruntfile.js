@@ -35,10 +35,21 @@ module.exports = function(grunt) {
                     ext: '.min.css'
                 }]
             }
+        },
+        htmlmin: { // Task
+            dist: { // Target
+                options: { // Target options
+                    removeComments: true,
+                    collapseWhitespace: true
+                },
+                files: { // Dictionary of files
+                    'index.html': 'indexsrc.html' // 'destination': 'source'
+                }
+            }
         }
     });
-
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-responsive-images');
-    grunt.registerTask('default', ['responsive_images', 'cssmin']);
+    grunt.registerTask('default', ['responsive_images', 'cssmin', 'htmlmin']);
 };
