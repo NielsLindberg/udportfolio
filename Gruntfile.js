@@ -17,17 +17,28 @@ module.exports = function(grunt) {
                     src: ['**.{jpeg,JPG,jpg,gif,png}'],
                     cwd: "img/",
                     dest: "img/production/"
-                },
-                {
+                }, {
                     expand: true,
                     src: ['**.{jpeg,JPG,jpg,gif,png}'],
                     cwd: "views/images/",
                     dest: "views/images/production/"
                 }]
             }
+        },
+        cssmin: {
+            target: {
+                files: [{
+                    expand: true,
+                    cwd: 'css',
+                    src: ['*.css', '!*.min.css'],
+                    dest: 'css',
+                    ext: '.min.css'
+                }]
+            }
         }
     });
 
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-responsive-images');
-    grunt.registerTask('default', ['responsive_images']);
+    grunt.registerTask('default', ['responsive_images', 'cssmin']);
 };
